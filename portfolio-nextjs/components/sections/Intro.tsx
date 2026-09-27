@@ -29,12 +29,12 @@ export default function Intro() {
       if (photo) {
         tl.fromTo(
           photo,
-          { opacity: 0, y: -320, rotate: -6, scale: 0.9 },
-          { y: 0, rotate: 0, scale: 1, duration: 1.1, delay: 0.25, ease: "bounce.out" },
+          { opacity: 0, y: 90, rotate: -3, scale: 0.88, filter: "blur(14px)" },
+          { opacity: 1, y: 0, rotate: 0, scale: 1, filter: "blur(0px)", duration: 1.4, delay: 0.15, ease: "expo.out" },
           0
-        ).to(photo, { opacity: 1, duration: 0.3, ease: "power1.out" }, 0.25);
+        );
       }
-      if (caption) tl.call(() => caption.classList.add("is-dropped"), undefined, 1.35);
+      if (caption) tl.call(() => caption.classList.add("is-dropped"), undefined, 0.7);
       if (hint) {
         tl.fromTo(
           hint,
@@ -59,7 +59,7 @@ export default function Intro() {
 
   return (
     <section className="intro" id="intro">
-      <div className="intro-poster-text" aria-hidden="true">
+      <div className="intro-poster-text" aria-hidden="true" data-parallax="0.3">
         PORTFOLIO
       </div>
       <div className="intro-poster-label">JAPANESE LANGUAGE</div>

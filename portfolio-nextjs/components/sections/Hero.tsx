@@ -94,7 +94,7 @@ export default function Hero() {
           <HeroScene />
         </LazyCanvas>
       )}
-      <div className="hero-bg-text" aria-hidden="true">
+      <div className="hero-bg-text" aria-hidden="true" data-parallax="0.25">
         ようこそ
       </div>
 

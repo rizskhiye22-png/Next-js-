@@ -15,13 +15,21 @@ const LINKS = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("#home");
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    let lastY = window.scrollY;
     const onScroll = () => {
-      setScrolled(window.scrollY > 40);
+      const y = window.scrollY;
+      setScrolled(y > 40);
+      // Sembunyikan saat scroll ke bawah, tampilkan lagi saat scroll ke atas
+      if (Math.abs(y - lastY) > 6) {
+        setHidden(y > lastY && y > 160);
+        lastY = y;
+      }
       let current = LINKS[0].href;
       const trigger = window.scrollY + window.innerHeight * 0.35;
       LINKS.forEach(({ href }) => {
@@ -55,7 +63,11 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <header className={`navbar${scrolled ? " is-scrolled" : ""}`} ref={navRef}>
+    <header
+      className={`navbar${scrolled ? " is-scrolled" : ""}${hidden && !open ? " is-hidden" : ""}`}
+      ref={navRef}
+      onFocusCapture={() => setHidden(false)}
+    >
       <a href="#home" className="logo">
         Maul<span className="dot">.</span>
       </a>

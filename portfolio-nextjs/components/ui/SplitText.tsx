@@ -1,15 +1,5 @@
 import { CSSProperties, Fragment } from "react";
 
-// PRNG deterministik (seed 42) — sama persis dengan project vanilla,
-// supaya arah/rotasi acak kata konsisten tiap reload.
-function makeRand(seedInit = 42) {
-  let seed = seedInit;
-  return () => {
-    seed = (seed * 9301 + 49297) % 233280;
-    return seed / 233280;
-  };
-}
-
 type Lines = string[];
 
 function renderLines(lines: Lines, render: (line: string, key: number) => React.ReactNode) {
@@ -35,8 +25,10 @@ export function SplitWords({ lines, step = 0.045 }: { lines: Lines; step?: numbe
             const d = idx++ * step;
             return (
               <Fragment key={`${w}-${idx}`}>
-                <span className="word" style={{ transitionDelay: `${d}s` }}>
-                  {w}
+                <span className="word-mask">
+                  <span className="word" style={{ transitionDelay: `${d}s` }}>
+                    {w}
+                  </span>
                 </span>{" "}
               </Fragment>
             );
@@ -51,7 +43,7 @@ export function TaglineSplit({ text }: { text: string }) {
   return <SplitWords lines={[text]} step={0.03} />;
 }
 
-// .split-words-fancy — kata dengan arah/rotasi acak deterministik
+// .split-words-fancy — kata muncul dari blur + naik halus (stagger)
 export function SplitWordsFancy({
   lines,
   baseDelay = 0,
@@ -59,7 +51,6 @@ export function SplitWordsFancy({
   lines: Lines;
   baseDelay?: number;
 }) {
-  const rand = makeRand(42);
   let idx = 0;
   return (
     <>
@@ -69,16 +60,7 @@ export function SplitWordsFancy({
           .split(/\s+/)
           .filter(Boolean)
           .map((w) => {
-            const dir = rand() > 0.5 ? 1 : -1;
-            const rot = (rand() * 10 + 4) * dir;
-            const dy = 10 + rand() * 14;
-            const dx = rand() * 10 - 5;
-            const style = {
-              "--fword-rot": `${rot}deg`,
-              "--fword-dy": `${dy}px`,
-              "--fword-dx": `${dx}px`,
-              transitionDelay: `${baseDelay + idx * 0.035}s`,
-            } as CSSProperties;
+            const style = { transitionDelay: `${baseDelay + idx * 0.05}s` } as CSSProperties;
             idx++;
             return (
               <Fragment key={`${w}-${idx}`}>

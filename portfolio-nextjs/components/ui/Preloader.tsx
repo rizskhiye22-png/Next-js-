@@ -20,7 +20,7 @@ export default function Preloader() {
       setHiding(true);
       document.body.classList.remove("preloader-active");
       window.dispatchEvent(new CustomEvent("maul:preloader-done"));
-      window.setTimeout(() => setVisible(false), 800);
+      window.setTimeout(() => setVisible(false), 950);
     }, totalTextTime + 700);
 
     return () => {

@@ -22,7 +22,7 @@ export default function Contact() {
         </LazyCanvas>
       )}
       <Reveal className="contact-box reveal">
-        <div className="contact-deco contact-deco-breathe" aria-hidden="true">
+        <div className="contact-deco contact-deco-breathe" aria-hidden="true" data-parallax="0.15">
           また会いましょう
         </div>
         <span className="eyebrow-tag eyebrow-light about-eyebrow-pop">Punya ide?</span>

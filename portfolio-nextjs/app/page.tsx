@@ -1,6 +1,7 @@
 import Preloader from "@/components/ui/Preloader";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import CustomCursor from "@/components/ui/CustomCursor";
+import ScrollParallax from "@/components/ui/ScrollParallax";
 import Navbar from "@/components/Navbar";
 import Intro from "@/components/sections/Intro";
 import Hero from "@/components/sections/Hero";
@@ -24,6 +25,7 @@ export default function Home() {
       <Preloader />
       <ScrollProgress />
       <CustomCursor />
+      <ScrollParallax />
       <Navbar />
       <main id="main-content">
         <Intro />

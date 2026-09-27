@@ -72,18 +72,21 @@ export default function Skills() {
       </Reveal>
       <SkillMarquee rows={MARQUEE_ROWS} />
       <div className="skills-grid">
-        {GROUPS.map((g) => (
-          <Reveal key={g.title} className="skill-group reveal">
-            <h3>{g.title}</h3>
-            <ul>
-              {g.items.map((it) => (
-                <li key={it.label}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img className="skill-icon" src={it.icon} alt="" loading="lazy" decoding="async" />
-                  {it.label}
-                </li>
-              ))}
-            </ul>
+        {GROUPS.map((g, i) => (
+          // Delay stagger di wrapper supaya efek hover kartu tidak ikut tertunda
+          <Reveal key={g.title} className="reveal" style={{ transitionDelay: `${i * 0.08}s` }}>
+            <div className="skill-group">
+              <h3>{g.title}</h3>
+              <ul>
+                {g.items.map((it) => (
+                  <li key={it.label}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img className="skill-icon" src={it.icon} alt="" loading="lazy" decoding="async" />
+                    {it.label}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </Reveal>
         ))}
       </div>
