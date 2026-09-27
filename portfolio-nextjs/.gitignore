@@ -3,5 +3,4 @@ node_modules/
 out/
 .vercel/
 *.tsbuildinfo
-next-env.d.ts.bak
 .env*.local
